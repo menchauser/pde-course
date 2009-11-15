@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report} % Paper format
+\documentclass[a4paper,12pt,draft]{report} % Paper format
 
 % Packages
 %\usepackage[T2A]{fontenc}	% Internal LaTeX fonts table
@@ -62,7 +62,6 @@
 \input{Problem}
 \input{Summary}
 
-
 \renewcommand{\contentsname}{\begin{center}Содержание\end{center}}
 
 %Page numbers
@@ -71,6 +70,7 @@
 %\input{Introduction}
 
 % Body
+\input{Preamble}
 \input{Model}
 \input{Solve}
 \input{Remainder}
