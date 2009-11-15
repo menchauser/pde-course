@@ -1,0 +1,168 @@
+\chapter{Решение}
+
+\section{Собственные функции}
+
+Для последующих действий необходимо представить функцию $U$ в виде разложения по собственным функциям. Сначала найдем собственные функции. Для этого решим задачу Штурма-Лиувилля.\\
+Представим функцию в виде
+\[
+U(y, z, t) = T(t)Y(y)Z(z).
+\]
+Подставим данное представление в следующее однородное уравнение
+\[
+\frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U\\
+\]
+И получим следующий вид
+\[
+\frac{1}{c^2}\frac{T''}{T} = \frac{Y''}{Y} + \frac{Z''}{Z} = -(\lambda^2 + \mu^2).\\
+\]
+
+Решив две задачи Штурма-Лиувилля
+\[
+\begin{array}{ll}
+  \left\{
+    \begin{array}{l}
+      Y'' + \lambda^2Y = 0, \\
+      Y|_{y=0} = Y|_{y=l_y} = 0,
+    \end{array}
+  \right.
+  \left\{
+    \begin{array}{l}
+      Z'' + \mu^2Z = 0, \\
+      Z|_{z=0} = Z|_{z=l_z} = 0,
+    \end{array}
+  \right.  
+\end{array}
+\]
+получим, следующие собственные числа и собственные функции для $Y$ и $Z$
+\[
+\begin{array}{ll}
+  \left\{
+    \begin{array}{l}
+      Y = A\sin\lambda y, \\
+      \lambda = \frac{\pi n}{l_y},
+    \end{array}
+  \right.
+  \left\{
+    \begin{array}{l}
+      Z = B\sin\mu z, \\
+      \mu = \frac{\pi m}{l_z}.
+    \end{array}
+  \right.  
+\end{array}
+\]
+
+\section{Поиск решения}
+
+Таким образом, $U$ можно представить в виде следующего двойного ряда Фурье
+\[
+U(y, z, t) = \displaystyle \sum_{m=1}^{\infty}\sum_{n=1}^{\infty} \gamma(t) \sin\frac{\pi n y}{l_y} \sin\frac{\pi m z}{l_z}.
+\]
+\\
+Разложим по данным собственным функциям неоднородную правую часть и все начальные условия. В дальнейших рассуждениях для простоты умножим левую и правую части уравнения на $c^2$, получив
+\[
+\frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + \pi^2 c^2
+\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2
+  \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}.\\
+\]
+\\
+%Кроме того введем для простоты две замены
+% \begin{eqnarray*}
+%   k &=& \frac{2\pi c}{\lambda},\\
+%   w_{nm} &=& \pi c \sqrt{\frac{n^2}{l_y^2} + \frac{m^2}{l_z^2}}.\\
+% \end{eqnarray*}
+
+\begin{enumerate}
+\item Разложение неоднородной правой части.
+  Разложим следующую функцию $G(y, z, t) = \pi^2 c^2\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}$ по данным базисным функциям. Заметим, что функция $G$ уже содержит в себе собственную функцию $\sin\frac{\pi y}{l_y}$, значит, необходимо разложить лишь зависящую от $z$ часть. Разложение будет иметь вид
+  \[
+  G(y, z, t) =  \pi^2 c^2 \frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}  g_{nm}^{(z)}(t) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \]
+  Найдем коэффициенты ряда. 
+  \begin{eqnarray*}
+    g_{nm}(t) &=& \frac{2}{l_z} \displaystyle \int_0^{l_z} \frac{l_z - z}{l_z} \sin\frac{\pi m z}{l_z} dz = \frac{2}{l_z}\left[\int_0^{l_z}\sin{\pi m z}{l_z}dz - \int_0^{l_z}\frac{z}{l_z} \sin{\pi m z}{l_z}dz\right]\\
+    &=& \frac{2}{l_z} \left[ \left. -\frac{l_z}{\pi m} \cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} - \left. \frac{z l_z}{\pi m}\cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} + \int_0^{l_z}\frac{l_z}{\pi m}\cos\frac{\pi m z}{l_z}dz\right]\\
+    &=& \frac{2}{l_z}\frac{l_z}{\pi m} \left( 1 - (-1)^m - (-1)^{m+1} \right) = \frac{2}{\pi m}.
+  \end{eqnarray*}
+  Таким образом, получаем
+  \[
+  G(y, z, t) = 2\pi c^2\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}\frac{1}{m}\sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \]
+
+\item Разложение начального условия.
+
+
+  Для удобства введем замену $k = \frac{2\pi c}{\lambda}$. Теперь разложим начальное условие  $\Phi(y, z, t) = -k\frac{l_z - z}{l_z}\sin\frac{\pi y}{l_y}$. Как и в предыдущем случае, она уже разложена по собственным функциям относительно $y$, будем искать разложение относительно $sin\frac{\pi m z}{l_z}$. Разложения будет иметь следующий вид
+  \[
+  \Phi(y, z, t) = \displaystyle -k\sum_{m=1}^{\infty}\varphi(t) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \]
+  Найдем коэффициенты разложения
+  \begin{eqnarray*}
+    \varphi(t) = \displaystyle \frac{2}{l_z} \int_0^{l_z} \frac{l_z - z}{l_z}\sin\frac{\pi m z}{l_z}dz = \frac{2}{\pi m}.
+  \end{eqnarray*}
+  Таким образом
+  \[
+  \Phi(y, z, t) = -\frac{2k}{\pi}\displaystyle \sum_{m=1}^{\infty} \frac{1}{m} \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \]
+\end{enumerate}
+
+Подставим все полученные разложения и учтем, что правая часть и начальное условие не являются нулевыми лишь при $n = 1$, поэтому и разложение $U(y, z, t)$ представим в виде обыкновенного ряда Фурье.
+\[
+U(y, z, t) = \displaystyle \sum_{m=1}^{\infty} \gamma(t) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+\]
+Подставив в систему разложения и приравняв коэффициенты при одинаковых базисных функциях получим систему обыкновенных дифференциальных уравнений с начальными условиями вида
+\[
+\left\{
+    \begin{array}{l}
+      \gamma''(t) + w^2_{m}\gamma(t) = \frac{2\pi c^2}{m}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt},\\
+      \begin{array}{rcl}
+      \gamma(0) &=& 0,\\
+      \gamma'(0) &=& -\frac{2k}{\pi m}.
+      \end{array}
+    \end{array}
+\right.
+\]\\
+Здесь $w_{m} = \pi c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}}$\\
+Найдем общее решение соответствующего однородного уравнения
+\[
+\begin{array}{l}
+  \gamma''(t) + w^2_{m}\gamma(t) = 0,\\
+  \gamma^{0}(t) = A\cos{w_m t} + B\sin{w_mt}.
+\end{array}
+\]
+Рассмотрим теперь неоднородную задачу и найдем ее частное решение. Исходя из вида правой части, вид решения будет таким
+\[
+\tilde{\gamma}(t) = C\cos{kt} + D\sin{kt}.
+\]
+Подставим функцию такого вида в уравнение и получим
+\[
+-k^2C\cos{kt} - k^2 D\sin{kt} + w^2_m C\cos{kt} + w^2_{m} D\cos{kt} = \frac{2\pi c^2}{m}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt}.
+\]
+Приравняем коэффициенты при соответствующих функциях и получим систему
+$\begin{equationsset}
+      (w_m^2 - k^2)C & = & 0, \\
+      (w_m^2 - k^2)D & = & \frac{2\pi c^2}{m}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right).
+\end{equationsset}$
+      
+
+Отсюда $C = 0$, $D = \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)$.\\
+Общее решение выглядит как сумма общего решения однородного уравнения и частного решения неоднородного, то есть
+\[
+\gamma(t) = A\cos{w_mt} + B\sin{w_mt} + \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt}.
+\]
+Используем начальные условия и получим систему
+\[
+\left\{
+  \begin{array}{l}
+    A = 0,\\
+    w_nB + kD = -\frac{2k}{\pi m} \Rightarrow B = -\frac{k}{w_m}\left(\frac{2}{\pi m} + D \right).
+  \end{array}
+\right.
+\]
+Таким образом
+\begin{eqnarray*}
+  \gamma(t) &=& \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt},\\
+  U(y, z, t) &=& \displaystyle \sum_{m=1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z},\\
+  E_x(y, z, t) &=& \displaystyle
+    \sum_{m=1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}\\
+    &+& \frac{l_z - z}{l_z} \sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}
+\end{eqnarray*}

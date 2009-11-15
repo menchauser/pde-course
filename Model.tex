@@ -1,0 +1,44 @@
+\chapter{Математическая модель}
+
+Для данной задачи очевидным является записать математическую модель в
+виде уравнения распространения электромагнитных волн.
+\[
+\left\{
+\begin{array}{rclrcl}
+  \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz}
+  E_x, & \Delta_{yz} &=& \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}\\
+  E_x|_{z=0} &=& \sin\frac{\pi y}{l_y} \sin\frac{2\pi c}{\lambda}t, & E_x|_{z=l_z} &=& 0,\\
+  E_x|_{y=0} &=& 0, & E_x|_{y=l_y} &=& 0,\\
+  E_x|_{t=0} &=& 0, & \frac{\partial E_x}{\partial t} &=& 0.
+\end{array}
+\right.
+\]
+\\
+Как видно, такую задачу невозможно решить методом разделения
+переменных вследствие неоднородного краевого условия. Для решения этой
+проблемы сделаем замену $U = E_x - \frac{l_z - z}{l_z} \sin\frac{2\pi
+  c}{\lambda}t \sin\frac{\pi y}{l_y}$. Получим следующую задачу
+математической физики
+\[
+\left\{
+  \begin{array}{l}
+    \frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + \pi^2
+    \frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2
+      \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y},\\
+    \begin{array}{rcl}
+      U|_{z=0} &=& 0,\\
+      U|_{y=0} &=& 0,\\
+      U|_{t=0} &=& 0.\\
+    \end{array}
+    \begin{array}{rcl}
+      U|_{z=l_z} &=& 0,\\
+      U|_{y=l_y} &=& 0,\\
+      \frac{\partial U}{\partial t} &=& \frac{2\pi
+        c}{\lambda} \frac{l_z - z}{l_z} \sin\frac{\pi y}{\l_y}.
+    \end{array}
+  \end{array}
+\right.
+\]
+\\
+Получена неоднородная задача, имеющая однородные краевые условия (что
+позволяет нам применять метод разделения переменных).

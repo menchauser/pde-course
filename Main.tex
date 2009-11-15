@@ -1,0 +1,76 @@
+\documentclass[a4paper,12pt]{report} % Paper format
+
+% Packages
+%\usepackage[T2A]{fontenc}	% Internal LaTeX fonts table
+\usepackage[utf8]{inputenc}	% Encoding of this document
+\usepackage[english,russian]{babel}	% Using russian and english dictionaries
+\usepackage{amsfonts,amsmath,calc,fancyhdr,geometry,graphicx,indentfirst,latexsym}	% All used packages
+
+% СТП СГАУ 6.1.4 - 97
+\newlength{\standardleftmargin}	% Absolute left margin
+\newlength{\standardrightmargin}	% Absolute right margin
+\newlength{\standardtopmargin}	% Absolute top margin
+\newlength{\standardbottommargin}	% Absolute bottom margin
+\setlength{\standardleftmargin}{30mm}	% Absolute left margin
+\setlength{\standardrightmargin}{10mm}	% Absolute right margin
+\setlength{\standardtopmargin}{15mm}	% Absolute top margin
+\setlength{\standardbottommargin}{20mm}	% Absolute bottom margin
+
+% Nesting
+%\pagestyle{fancy}
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyhead[R]{\thepage}
+%\fancyhead[C]{Аналитическое решение краевых задач математической физики}
+\renewcommand{\baselinestretch}{1.5}	% Sesquialteral interval
+\setlength{\hoffset}{\standardleftmargin - 1in - \oddsidemargin}
+\setlength{\voffset}{\standardtopmargin - 1in - \topmargin}
+\setlength{\textwidth}{\paperwidth - 1in - \hoffset - \oddsidemargin - \marginparsep - \marginparwidth - \standardrightmargin}
+\setlength{\textheight}{\paperheight - 1in - \voffset - \topmargin - \headheight - \headsep - \footskip - \standardbottommargin}
+\setlength{\headwidth}{\textwidth + \marginparsep + \marginparwidth}
+
+% Macro
+
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{
+  \vspace*{50 pt}
+  {\parindent=0pt
+   \raggedright \normalfont\huge\bfseries
+   \@chapapp{}
+    \normalfont\Huge\bfseries \thechapter ~ #1\par
+    \nopagebreak
+    \vspace{40 pt}
+  }
+}
+\makeatother
+
+% Commands
+
+\newcommand{\diff}{\mathrm{d}}
+
+\newenvironment{equationsset}
+{\left\{\begin{array}{rcl}}
+{\end{array}\right.}
+
+% Page properties
+\author{Caesar}	% Author
+\title{Рассчётная работа}	% Title
+\begin{document}
+\renewcommand{\chaptername}{}
+\input{CoverPage}
+\input{Problem}
+%\input{Synopsis}
+\renewcommand{\contentsname}{\begin{center}Содержание\end{center}}
+\tableofcontents
+%\input{Introduction}
+
+% Body
+\input{Model}
+\input{Solve}
+\input{Remainder}
+% End Body
+
+%\input{Conclusion}
+%\input{Bibliography}
+%\input{Enclosure}
+\end{document}
