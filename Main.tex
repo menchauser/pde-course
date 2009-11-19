@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,draft]{report} % Paper format
+\documentclass[a4paper,12pt]{report} % Paper format
 
 % Packages
 %\usepackage[T2A]{fontenc}	% Internal LaTeX fonts table
@@ -29,6 +29,8 @@
 \setlength{\textwidth}{\paperwidth - 1in - \hoffset - \oddsidemargin - \marginparsep - \marginparwidth - \standardrightmargin}
 \setlength{\textheight}{\paperheight - 1in - \voffset - \topmargin - \headheight - \headsep - \footskip - \standardbottommargin}
 \setlength{\headwidth}{\textwidth + \marginparsep + \marginparwidth}
+
+% \addto\captionsrussian{\def\refname{Использованные источники}}
 
 % Macro
 
@@ -64,6 +66,9 @@
 
 \renewcommand{\contentsname}{\begin{center}Содержание\end{center}}
 
+\newcommand{\tocsecindent}{\hspace{7mm}}
+\renewcommand\bibname{Список использованных источников}
+
 %Page numbers
 \setcounter{page}{2}
 \tableofcontents
@@ -76,7 +81,7 @@
 \input{Remainder}
 % End Body
 
-%\input{Conclusion}
+\input{Conclusion}
 \input{Bibliography}
 %\input{Enclosure}
 \end{document}
