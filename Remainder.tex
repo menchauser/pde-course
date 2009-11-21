@@ -1,90 +1,119 @@
 \chapter{Исследование сходимости}
 \section{Оценка погрешности}
 
-Итак, мы получили решение в виде ряда. Очевидно, что подобный ряд сходится. Чтобы выдавать численное значение напряжённости, нам необходимо суммировать определённое конечное количество элементов ряда. Пусть это будет $M$ элементов.
-$S_M = \sum \limits_{m=1}^{M} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} + \\
-    + \frac{l_z - z}{l_z} \sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}$
+Итак, мы получили решение в виде ряда. Чтобы выдавать численное значение напряжённости, нам необходимо суммировать определённое конечное количество элементов ряда. Пусть это будет $M$ элементов.
+\begin{eqnarray*}
+&&S_M = \sum \limits_{m=1}^{M} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.\\
+\end{eqnarray*}
 
 Эту частичную сумму мы и будем выдавать в качестве ответа. При этом мы ошибёмся на величину, равную модулю хвоста ряда, начиная с $(M+1)$-ого элемента. Обозначим за $r_M$ хвост нашего ряда.
+\[
+r_M = \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+\]
 
-$r_M = \sum \limits_{m=M}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}$
+Оценим сверху модуль хвоста ряда $|r_{M}|$ и выясним, как величина ошибки зависит от количества просуммированных элементов. Воспользуемся неравенством треугольника, чтобы перейти к оценки каждого слагаемого, затем все синусы оценим сверху единицами.
+\begin{eqnarray*}
+  |r_{M}| &=& \left| \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| \leq \\
+  \\
+%  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| = \\
+  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \left| \sin\frac{\pi y}{l_y} \right| \left| \sin\frac{\pi m z}{l_z} \right| \leq \\
+  \\
+  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \leq \\
+  \\
+  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| = \\
+  \\
+  &=& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \left| \sin{kt} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right) \right| \left| \sin{w_mt} \right| \leq \\
+  \\
+  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right) \right| \leq \\
+  \\
+  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{2 k}{\pi m w_m} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k D}{w_m} \right|.
+\end{eqnarray*}
 
-Оценим сверху модуль хвоста ряда $|r_{M+1}|$ и выясним, как величина ошибки зависит от количества просуммированных элементов. Воспользуемся неравенством треугольника, чтобы перейти к оценки каждого слагаемого, затем все синусы оценим сверху единицами.
-
-$|r_{M+1}| = \left| \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| \leq \\
-\leq \sum \limits_{m=M+1}^{\infty} \left| \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| = \\
-= \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \left| \sin\frac{\pi y}{l_y} \right| \left| \sin\frac{\pi m z}{l_z} \right| \leq \\
-\leq \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \leq \\
-\leq \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| = \\
-= \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \left| \sin{kt} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right) \right| \left| \sin{w_mt} \right| \leq \\
-\leq \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right) \right| \leq \\
-\leq \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{2 k}{\pi m w_m} \right| + \sum \limits_{m=M+1}^{\infty} \left| \frac{k D}{w_m} \right|$
-
-Если удастся оценить каждый из этих хвостов, то сумма полученных оценок будет оценкой остатка исходного ряда. Для получения оценок восользуемся интегральным признаком Коши \cite{sendov}: \\
-$\sum \limits_{n = N + 1}^{\infty} f(n) \leq \int \limits_N^{\infty} f(x) \diff x$
+Если удастся оценить каждый из этих хвостов, то сумма полученных оценок будет оценкой остатка исходного ряда. Для получения оценок восользуемся интегральным признаком Коши (см. \cite{sendov}): \\
+\[
+\sum \limits_{n = N + 1}^{\infty} f(n) \leq \int \limits_N^{\infty} f(x) \diff x.
+\]
 
 Cчитаем, кроме того, что $2 l_y > \lambda$, т.~е. размер стенки волновода превосходит половину длины волны.
+\begin{eqnarray*}
+  & &\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| =
+  \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2\pi c^2}{m \left| w_m^2 - k^2 \right|} =\\
+  \\
+  &=&\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2\pi c^2}{m \left| \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} \right) - \frac{4 \pi^2 c^2}{\lambda^2} \right|} = \\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2 \lambda^2 l_y^2 l_z^2}{m \pi \left| m^2 \lambda^2 l_y^2 - 4 l_y^2 l_z^2 + \lambda^2 l_z^2 \right|} =\\
+  \\
+  &=&\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2 l_z^2}{m \pi \left| m^2 - \frac{4 l_y^2 l_z^2 - \lambda^2 l_z^2}{\lambda^2 l_y^2} \right|} = \\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{\left| m^2 - \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \right|} =\\
+  \\
+  &=& \delta{}^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{\left| m^2 - \delta{}^2 \right|}.
+\end{eqnarray*}
 
-$\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2\pi c^2}{m \left| w_m^2 - k^2 \right|} =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2\pi c^2}{m \left| \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} \right) - \frac{4 \pi^2 c^2}{\lambda^2} \right|} = \\
-= \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2 \lambda^2 l_y^2 l_z^2}{m \pi \left| m^2 \lambda^2 l_y^2 - 4 l_y^2 l_z^2 + \lambda^2 l_z^2 \right|} =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \frac{2 l_z^2}{m \pi \left| m^2 - \frac{4 l_y^2 l_z^2 - \lambda^2 l_z^2}{\lambda^2 l_y^2} \right|} = \\
-= \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{\left| m^2 - \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \right|} =
-G^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{\left| m^2 - G^2 \right|}$
-
-Здесь $G = \frac{\sqrt{4l_y^2 - \lambda^2}}{\lambda} \frac{l_z}{l_y}$. Это константа, так что найдётся такое $M$, что $\forall m > M \colon m > G$. Будем всегда брать $M$ именно таким. Это позволит нам раскрыть последний модуль.
-
-$\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \leq G^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{m^2 - G^2} \leq
-G^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{x^2 - G^2} =
-G^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x - G) (x + G)} \leq \\
-\leq G^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x + G)} \leq
-G^2 \int \limits_M^{\infty} \frac{2 \diff x}{\pi x^2} =
-\left. - G^2 \frac{2}{\pi x} \right|_M^{\infty} = \frac{2 G^2}{\pi M}$
+Здесь $\delta{} = \cfrac{\sqrt{4l_y^2 - \lambda^2}}{\lambda}\cfrac{l_z}{l_y}$. Это константа, так что найдётся такое $M$, что \\$\forall m > M \colon m > \delta{}$. Будем всегда брать $M$ именно таким. Это позволит нам раскрыть последний модуль.
+\begin{eqnarray*}
+  & &\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \leq \delta{}^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{m^2 - \delta{}^2} \leq\\
+  \\
+  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{x^2 - \delta{}^2} = \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x - \delta{}) (x + \delta{})} \leq \\
+  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x + \delta{})} \leq \delta{}^2 \int \limits_M^{\infty} \frac{2 \diff x}{\pi x^2} = \left. - \delta{}^2 \frac{2}{\pi x} \right|_M^{\infty} = \frac{2 \delta{}^2}{\pi M}.
+\end{eqnarray*}
 
 Помня об указанных выше предположениях, оценим второй и третий хвосты.
+\begin{eqnarray*}
+  & & \sum \limits_{m=M+1}^{\infty} \left| \frac{2 k}{\pi m w_m} \right| =
+  \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c}{m \lambda \pi^2 c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}}} \right| \leq
+  \sum \limits_{m=M+1}^{\infty} \left| \frac{4}{m \lambda \pi \sqrt{\frac{m^2}{l_z^2}}} \right| =\\
+  \\
+  &=&\sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{\pi \lambda m^2} \leq
+  \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2} =
+  \left. - \frac{4 l_z}{\pi \lambda x} \right|_M^{\infty} =
+  \frac{4 l_z}{\pi \lambda M};
+\end{eqnarray*}
+\begin{eqnarray*}
+  &&\sum \limits_{m=M+1}^{\infty} \left| \frac{k D}{w_m} \right| =
+  \sum \limits_{m=M+1}^{\infty} \left| \frac{2 \pi k c^2}{m w_m (w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| =\\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi^2 c^3}{m \lambda \pi c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}} \left( \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} \right) - \frac{4 \pi^2 c^2}{\lambda^2} \right) } \right| \leq \\
+  \\
+  &\leq& \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c^2}{m \lambda \sqrt{\frac{m^2}{l_z^2}} \left( \frac{\pi^2 c^2}{l_y^2} + \frac{\pi^2 c^2 m^2}{l_z^2} - \frac{4 \pi^2 c^2}{\lambda^2} \right) } \right| =\\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi l_z c^2}{m^2 \lambda \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} - \frac{4}{\lambda^2} \right) } \right| = \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 l_z}{m^2 \lambda \pi \left| \frac{1}{l_y^2} + \frac{m^2}{l_z^2} - \frac{4}{\lambda^2} \right|} =\\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 \lambda^2 l_y^2 l_z^3}{m^2 \lambda \pi \left| m^2 \lambda^2 l_y^2 - 4 l_y^2 l_z^2 + \lambda^2 l_z^2 \right|} = \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 l_z^3}{m^2 \lambda \pi \left| m^2 - \frac{4 l_y^2 l_z^2 - \lambda^2 l_z^2}{\lambda^2 l_y^2} \right|} =\\
+  \\
+  &=& \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{m^2 \lambda \pi \left| m^2 - \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \right|} = \delta{}^2 \sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{m^2 \lambda \pi \left( m^2 - \delta{}^2 \right)} \leq \\
+  \\
+  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 \left( x^2 - \delta{}^2 \right)} = 
+  \delta{}^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 (x - \delta{}) (x + g)} \leq
+  \delta{}^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 (x + \delta{})} \leq \\
+  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{4 l_z}{\pi \lambda x^3} =
+  \left. - \delta{}^2 \frac{8 l_z}{\pi \lambda x^2} \right|_M^{\infty} =
+  \frac{8 l_z \delta{}^2}{\pi \lambda M^2}.
+\end{eqnarray*}
 
-$\sum \limits_{m=M+1}^{\infty} \left| \frac{2 k}{\pi m w_m} \right| =
-\sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c}{m \lambda \pi^2 c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}}} \right| \leq
-\sum \limits_{m=M+1}^{\infty} \left| \frac{4}{m \lambda \pi \sqrt{\frac{m^2}{l_z^2}}} \right| =
-\sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{\pi \lambda m^2} \leq \\
-\leq \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2} =
-\left. - \frac{4 l_z}{\pi \lambda x} \right|_M^{\infty} =
-\frac{4 l_z}{\pi \lambda M}$
-
-$\sum \limits_{m=M+1}^{\infty} \left| \frac{k D}{w_m} \right| =
-\sum \limits_{m=M+1}^{\infty} \left| \frac{2 \pi k c^2}{m w_m (w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi^2 c^3}{m \lambda \pi c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}} \left( \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} \right) - \frac{4 \pi^2 c^2}{\lambda^2} \right) } \right| \leq \\
-\leq \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c^2}{m \lambda \sqrt{\frac{m^2}{l_z^2}} \left( \frac{\pi^2 c^2}{l_y^2} + \frac{\pi^2 c^2 m^2}{l_z^2} - \frac{4 \pi^2 c^2}{\lambda^2} \right) } \right| =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi l_z c^2}{m^2 \lambda \pi^2 c^2 \left( \frac{1}{l_y^2} + \frac{m^2}{l_z^2} - \frac{4}{\lambda^2} \right) } \right| = \\
-= \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 l_z}{m^2 \lambda \pi \left| \frac{1}{l_y^2} + \frac{m^2}{l_z^2} - \frac{4}{\lambda^2} \right|} =
-\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 \lambda^2 l_y^2 l_z^3}{m^2 \lambda \pi \left| m^2 \lambda^2 l_y^2 - 4 l_y^2 l_z^2 + \lambda^2 l_z^2 \right|} = \\
-= \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \sum \limits_{m=M+1}^{\infty}  \frac{4 l_z^3}{m^2 \lambda \pi \left| m^2 - \frac{4 l_y^2 l_z^2 - \lambda^2 l_z^2}{\lambda^2 l_y^2} \right|} =
-\frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{m^2 \lambda \pi \left| m^2 - \frac{4l_y^2 - \lambda^2}{\lambda^2} \frac{l_z^2}{l_y^2} \right|} = \\
-= G^2 \sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{m^2 \lambda \pi \left( m^2 - G^2 \right)} \leq
-G^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 \left( x^2 - G^2 \right)} = 
-G^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 (x - G) (x + g)} \leq
-G^2 \int \limits_M^{\infty} \frac{4 l_z \diff x}{\pi \lambda x^2 (x + G)} \leq \\
-\leq G^2 \int \limits_M^{\infty} \frac{4 l_z}{\pi \lambda x^3} =
-\left. - G^2 \frac{8 l_z}{\pi \lambda x^2} \right|_M^{\infty} =
-\frac{8 l_z G^2}{\pi \lambda M^2}$
 
 Таким образом, мы получили оценку хвоста: \\
-$\left| r_{M+1} \right| \leq \frac{2 G^2}{\pi M} + \frac{4 l_z}{\pi \lambda M} + \frac{8 l_z G^2}{\pi \lambda M^2} = \frac{2 \lambda G^2 M + 4 l_z M + 8 l_z G^2}{\pi \lambda M^2}$
+\[
+\left| r_{M+1} \right| \leq \frac{2 \delta{}^2}{\pi M} + \frac{4 l_z}{\pi \lambda M} + \frac{8 l_z \delta{}^2}{\pi \lambda M^2} = \frac{2 \lambda \delta{}^2 M + 4 l_z M + 8 l_z \delta{}^2}{\pi \lambda M^2}.
+\]
 
+Теперь мы можем с уверенностью заявить, что ряд, представляющий решение, сходится.
 Это значение мы будем выдавать за ошибку при вычислениях:\\
-$\varepsilon = \frac{2 \lambda G^2 M + 4 l_z M + 8 l_z G^2}{\pi \lambda M^2}$
+\[
+\varepsilon = \frac{2 \lambda \delta{}^2 M + 4 l_z M + 8 l_z \delta{}^2}{\pi \lambda M^2}.
+\]
 
 Задумаемся над тем, сколько элементов ряда нам нужно оставить, чтобы выдержать наперёд заданную погрешность $\varepsilon$.
-
-$\frac{2 \lambda G^2 M + 4 l_z M + 8 l_z G^2}{\pi \lambda M^2} - \varepsilon = 0$;
-
-$\pi \lambda \varepsilon M^2 - 2 \left( \lambda G^2 + 2 l_z \right) M - 8 l_z G^2 = 0$.
+\begin{eqnarray*}
+\frac{2 \lambda \delta{}^2 M + 4 l_z M + 8 l_z \delta{}^2}{\pi \lambda M^2} - \varepsilon &=& 0;\\
+\pi \lambda \varepsilon M^2 - 2 \left( \lambda \delta{}^2 + 2 l_z \right) M - 8 l_z \delta{}^2 &=& 0.
+\end{eqnarray*}
 
 Единственный положительный корень этого уравнения:
-
-$M = \frac{2 \left( \lambda G^2 + 2 l_z \right) + \sqrt{4 \left( \lambda G^2 + 2 l_z \right)^2 + 32 \pi \lambda l_z \varepsilon G^2}}{2 \pi \lambda \varepsilon} =
-\frac{\lambda G^2 + 2 l_z + \sqrt{\left( \lambda G^2 + 2 l_z \right)^2 + 8 \pi \lambda l_z \varepsilon G^2}}{\pi \lambda \varepsilon}$
+\begin{eqnarray*}
+  M &=& \frac{2 \left( \lambda \delta{}^2 + 2 l_z \right) + \sqrt{4 \left( \lambda \delta{}^2 + 2 l_z \right)^2 + 32 \pi \lambda l_z \varepsilon \delta{}^2}}{2 \pi \lambda \varepsilon} =\\
+  &=&\frac{\lambda \delta{}^2 + 2 l_z + \sqrt{\left( \lambda \delta{}^2 + 2 l_z \right)^2 + 8 \pi \lambda l_z \varepsilon \delta{} c^2}}{\pi \lambda \varepsilon}.
+\end{eqnarray*}
 
 Оценка $M$ при подсчёте округляется вверх до ближайшего целого.
 
