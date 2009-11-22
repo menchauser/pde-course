@@ -36,12 +36,12 @@
     \begin{array}{rclr}
       \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz} E_x, & 0 \le y \le l_y,  0 \le z \le l_z, \\
       &&& 0 \le t \le T; \\
-      \left. E_x \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-      \left. E_x \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-      \left. E_x \right|_{z=0} &=&  \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda} t, & 0 \le y \le l_y, 0 < t \le T; \\
-      \left. E_x \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
-      \left. E_x \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
-      \left. \frac{\partial E_x}{\partial t} \right|_{t=0} &=& 0, & 0 \le y \le l_z, 0 \le z \le l_z.
+      \left. E_x \right|_{y=0} & = & 0, & 0 < z \le l_z, 0 < t \le T; \\
+      \left. E_x \right|_{y=l_y} & = & 0, & 0 < z \le l_z, 0 < t \le T; \\
+      \left. E_x \right|_{z=0} &=&  \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda} t, & 0 \le y \le l_y, 0 \le t \le T; \\
+      \left. E_x \right|_{z=l_z} &=& 0, & 0 < y < l_y, 0 < t \le T; \\
+      \left. E_x \right|_{t=0} & = & 0, & 0 \le y \le l_y, 0 < z \le l_z; \\
+      \left. \frac{\partial E_x}{\partial t} \right|_{t=0} &=& 0, & 0 \le y \le l_y, 0 \le z \le l_z.
     \end{array}
   \right.
 \end{equation}
@@ -60,12 +60,12 @@
     \begin{array}{rclr}
       \frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} & = & \Delta_{yz} U + G(y, z, t), & 0 \le y \le l_y, 0 \le z \le l_z, \\
       &&& 0 \le t \le T;\\
-      \left. U \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-      \left. U \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\ 
+      \left. U \right|_{y=0} & = & 0, & 0 < z \le l_z, 0 < t \le T; \\
+      \left. U \right|_{y=l_y} & = & 0, & 0 < z \le l_z, 0 < t \le T; \\ 
       \left. U \right|_{z=0} & = &  0, & 0 \le y \le l_y, 0 < t \le T; \\
       \left. U \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
-      \left. U \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
-      \left. \frac{\partial U}{\partial t} \right|_{t=0} &=& \Phi(y, z), & 0 \le y \le l_z, 0 \le z \le l_z.
+      \left. U \right|_{t=0} & = & 0, & 0 \le y \le l_y, 0 \le z \le l_z; \\
+      \left. \frac{\partial U}{\partial t} \right|_{t=0} &=& \Phi(y, z), & 0 \le y \le l_y, 0 \le z \le l_z.
     \end{array}
   \right.
 \end{equation}
