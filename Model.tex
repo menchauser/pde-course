@@ -31,37 +31,43 @@
 Задумаемся о краевых условиях для нашей задачи. Раз три стенки выполнены из электропроводящего матриала, значит на них напряженности поля никогда не возникнет: $\left. E_x \right|_{y=0} = \left. E_x \right|_{y=l_y} = \left. E_x \right|_{z=l_z} = 0$. Напряженность на оставшейся стенке нам известна. Она поддерживается неким источником и изменяется по известному закону: $\left. E_x \right|_{z=0} = \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda}t$ все интересующее нас время. При этом в начальный момент времени на всем волноводе какая-либо напряженность отсутствует и ее производная во времени --- тоже: $\left. E_x \right|_{t=0} = \left. \frac{\partial E_x}{\partial t} \right|_{t=0} = 0$. Присовокупив к \eqref{eq:wave_equation_2} эти условия, получим задачу математической физики:
 
 \begin{equation}
-\label{eq:problem}
-\left\{
-\begin{array}{rclr}
-\frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz} E_x, & 0 \le y \le l_y, 0 \le z \le l_z, 0 \le t \le T; \\
-\left. E_x \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-\left. E_x \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-\left. E_x \right|_{z=0} &=&  \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda} t, & 0 \le y \le l_y, 0 < t \le T; \\
-\left. E_x \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
-\left. E_x \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
-\left. \frac{\partial E_x}{\partial t} \right|_{t=0} &=& 0, & 0 \le y \le l_z, 0 \le z \le l_z.
-\end{array}
-\right.
+  \label{eq:problem}
+  \left\{
+    \begin{array}{rclr}
+      \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz} E_x, & 0 \le y \le l_y,  0 \le z \le l_z, \\
+      &&& 0 \le t \le T; \\
+      \left. E_x \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+      \left. E_x \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+      \left. E_x \right|_{z=0} &=&  \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda} t, & 0 \le y \le l_y, 0 < t \le T; \\
+      \left. E_x \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
+      \left. E_x \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
+      \left. \frac{\partial E_x}{\partial t} \right|_{t=0} &=& 0, & 0 \le y \le l_z, 0 \le z \le l_z.
+    \end{array}
+  \right.
 \end{equation}
 
-Как видно, задачу \eqref{eq:problem} невозможно решить методом разделения переменных вследствие неоднородного краевого условия. Для решения этой
-проблемы сделаем замену $U(y, z, t) = E_x(y, z, t) - \frac{l_z - z}{l_z} \sin\frac{2 \pi c}{\lambda}t \sin\frac{\pi y}{l_y}$. Получим следующую задачу
-математической физики:
+Как видно, задачу \eqref{eq:problem} невозможно решить методом разделения переменных вследствие неоднородного краевого условия. Для решения этой проблемы сделаем замену
+\begin{equation}
+  \label{eq:changeling}
+  U(y, z, t) = E_x(y, z, t) - \frac{l_z - z}{l_z} \sin\frac{2 \pi c}{\lambda}t \sin\frac{\pi y}{l_y}.
+\end{equation}
+
+  Подставив \eqref{eq:changeling} в \eqref{eq:problem} получим новую краевую задачу
 
 \begin{equation}
-\label{eq:new_problem}
-\left\{
-\begin{array}{rclr}
-\frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} & = & \Delta_{yz} U + G(y, z, t), & 0 \le y \le l_y, 0 \le z \le l_z, 0 \le t \le T; \\
-\left. U \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
-\left. U \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\ 
-\left. U \right|_{z=0} & = &  0, & 0 \le y \le l_y, 0 < t \le T; \\
-\left. U \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
-\left. U \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
-\left. \frac{\partial U}{\partial t} \right|_{t=0} &=& \Phi(y, z), & 0 \le y \le l_z, 0 \le z \le l_z.
-\end{array}
-\right.
+  \label{eq:new_problem}
+  \left\{
+    \begin{array}{rclr}
+      \frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} & = & \Delta_{yz} U + G(y, z, t), & 0 \le y \le l_y, 0 \le z \le l_z, \\
+      &&& 0 \le t \le T;\\
+      \left. U \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+      \left. U \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\ 
+      \left. U \right|_{z=0} & = &  0, & 0 \le y \le l_y, 0 < t \le T; \\
+      \left. U \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
+      \left. U \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
+      \left. \frac{\partial U}{\partial t} \right|_{t=0} &=& \Phi(y, z), & 0 \le y \le l_z, 0 \le z \le l_z.
+    \end{array}
+  \right.
 \end{equation}
 
 Здесь сразу же для компактности записи использованы обозначения:
