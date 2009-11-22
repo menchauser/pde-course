@@ -13,9 +13,8 @@ r_M = \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(
 
 Оценим сверху модуль хвоста ряда $|r_{M}|$ и выясним, как величина ошибки зависит от количества просуммированных элементов. Воспользуемся неравенством треугольника, чтобы перейти к оценки каждого слагаемого, затем все синусы оценим сверху единицами.
 \begin{eqnarray*}
-  |r_{M}| &=& \left| \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| \leq \\
+  |r_{M}| &=& \left| \sum \limits_{m=M+1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| \leqslant \\
   \\
-%  &\leq& \sum \limits_{m=M+1}^{\infty} \left| \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z} \right| = \\
   &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \left| \sin\frac{\pi y}{l_y} \right| \left| \sin\frac{\pi m z}{l_z} \right| \leq \\
   \\
   &\leq& \sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right| \leq \\
@@ -52,16 +51,31 @@ Cчитаем, кроме того, что $2 l_y > \lambda$, т.~е. разме
 
 Здесь $\delta{} = \cfrac{\sqrt{4l_y^2 - \lambda^2}}{\lambda}\cfrac{l_z}{l_y}$. Это константа, так что найдётся такое $M$, что \\$\forall m > M \colon m > \delta{}$. Будем всегда брать $M$ именно таким. Это позволит нам раскрыть последний модуль.
 \begin{eqnarray*}
-  & &\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \leq \delta{}^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{m^2 - \delta{}^2} \leq\\
-  \\
-  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{x^2 - \delta{}^2} = \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x - \delta{}) (x + \delta{})} \leq \\
-  &\leq& \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{(x + \delta{})} \leq \delta{}^2 \int \limits_M^{\infty} \frac{2 \diff x}{\pi x^2} = \left. - \delta{}^2 \frac{2}{\pi x} \right|_M^{\infty} = \frac{2 \delta{}^2}{\pi M}.
+  & &\sum \limits_{m=M+1}^{\infty} \left| \frac{2\pi c^2}{m(w_m^2 - k^2)} \frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right| \leq \delta{}^2 \sum \limits_{m=M+1}^{\infty} \frac{2}{\pi m} \frac{1}{m^2 - \delta{}^2} \leq \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{x^2 - \delta{}^2}.
+\end{eqnarray*}
+Учтем, что
+\begin{equation}
+  \label{rem:const:estimate}
+  \frac{1}{x(x^2 - \delta^2)} = \frac{1}{x(x - \delta)(x + \delta)} < \frac{1}{x^2(x - \delta)} < \frac{A}{x^3}.
+\end{equation}
+Оценим $A$. Из \eqref{rem:const:estimate} следует, что $A > \cfrac{x}{x - \delta}$. Поскольку $x$ - переменная величина, нужно подобрать такое $A$, чтобы оно было максимальним для всех $x$. 
+\begin{equation}
+  \label{rem:const:max}
+  A = \max\limits_{x}\left(\frac{x}{x - \delta}\right).
+\end{equation}
+Максимизируя \eqref{rem:const:max}, с учетом того, что $x$ представляет собой аналог дискретной переменной $m$, получим, что максимум достигается на $x = [\delta + 1]$, где квадратные скобки~--- операция взятия целой части.
+\[
+  A = \frac{\left[\delta + 1\right]}{\left[\delta + 1\right] - \delta}.
+\]
+Теперь можем продолжить раскрытие последнего модуля.
+\begin{eqnarray*}
+ && \delta{}^2 \int \limits_M^{\infty} \frac{2}{\pi x} \frac{\diff x}{x^2 - \delta{}^2} < \delta{}^2 \int \limits_M^{\infty} \frac{2A}{\pi} \frac{\diff x}{x^3} = \left. -\delta{}^2\frac{A}{\pi x^2} \right|_M^{\infty} = \frac{A\delta^2}{\pi M^2}.
 \end{eqnarray*}
 
 Помня об указанных выше предположениях, оценим второй и третий хвосты.
 \begin{eqnarray*}
   & & \sum \limits_{m=M+1}^{\infty} \left| \frac{2 k}{\pi m w_m} \right| =
-  \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c}{m \lambda \pi^2 c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}}} \right| \leq
+  \sum \limits_{m=M+1}^{\infty} \left| \frac{4 \pi c}{m \lambda \pi^2 c \sqrt{\frac{1}{l_y^2} + \frac{m^2}{l_z^2}}} \right| <
   \sum \limits_{m=M+1}^{\infty} \left| \frac{4}{m \lambda \pi \sqrt{\frac{m^2}{l_z^2}}} \right| =\\
   \\
   &=&\sum \limits_{m=M+1}^{\infty} \frac{4 l_z}{\pi \lambda m^2} \leq
@@ -97,7 +111,7 @@ Cчитаем, кроме того, что $2 l_y > \lambda$, т.~е. разме
 \left| r_{M+1} \right| \leq \frac{2 \delta{}^2}{\pi M} + \frac{4 l_z}{\pi \lambda M} + \frac{8 l_z \delta{}^2}{\pi \lambda M^2} = \frac{2 \lambda \delta{}^2 M + 4 l_z M + 8 l_z \delta{}^2}{\pi \lambda M^2}.
 \]
 
-Теперь мы можем с уверенностью заявить, что ряд, представляющий решение, сходится.
+Поскольку мы смогли оценить хвост ряда, представляющего решение, числом, можно с уверенностью заявить, что ряд сходится.
 Это значение мы будем выдавать за ошибку при вычислениях:\\
 \[
 \varepsilon = \frac{2 \lambda \delta{}^2 M + 4 l_z M + 8 l_z \delta{}^2}{\pi \lambda M^2}.
@@ -118,11 +132,9 @@ Cчитаем, кроме того, что $2 l_y > \lambda$, т.~е. разме
 Оценка $M$ при подсчёте округляется вверх до ближайшего целого.
 
 \section{Исследование качества оценки остатка}
-Исследуем с помощью ряда экспериментов качество полученной оценки используя следующий метод. С помощью полученной оценки найдем
-теоретическое количество элементов ряда $N_t$, достаточное для выполнения данной оценки. Возьмем $0$ в качестве стабильного элемента. 
-Будем идти с первого до $N_t$ элемента ряда, на каждом шаге проверяя, не различаются ли текущий элемент ряда и стабильный более, чем
-на погрешность $\varepsilon$. Если различаются, то будем считать стабильным текущий элемент ряда. Искомым практическим количеством
-элементов ряда, достаточным для удовлетворения заданной погрешности, будем считать номер последнего стабильного элемента.
+Исследуем с помощью ряда экспериментов качество полученной оценки используя следующий метод. Пусть $S_m$ - $m$-тая частичная сумма ряда.
+С помощью полученной оценки найдем теоретическое количество элементов ряда $N_t$, достаточное для выполнения данной оценки. 
+Возьмем $N_{p} = 1, m = 2$. Будем идти с первого до $N_t$ элемента ряда, на каждом шаге проверяя, не различаются ли $S_{N_p}$ и $S_m$ больше, чем на погрешность $\varepsilon$. Если различаются, то установим $N_p = m$. Пройдя весь ряд, получим, что $N_p$ и есть искомое практическое количество элементов ряда, достаточное для удовлетворения заданной погрешности.
 
 Зафиксируем $y = \frac{l_y}{2}$. Для большей убедительности фиксируем $z$ в трех точках: $z_0 = \frac{l_z}{8}$, $z_1 = \frac{l_z}{4}$ 
 и $z_2 = \frac{l_z}{2}$. Для верности время зафиксируем в достаточно большой момент $1$ с. Сведем результаты в таблицу 
@@ -135,7 +147,7 @@ Cчитаем, кроме того, что $2 l_y > \lambda$, т.~е. разме
     \hline
     $\mathrm{\varepsilon}$ & $0.1$ & $0.01$ & $0.001$ & $0.0001$ & $0.00001$ \\
     \hline
-    $\mathrm{N_p}$ & $2705$ & $26713$ & $266792$ & $2667475$ & $26674407$ \\
+    $\mathrm{N_p}$ & $1123$ & $4039$ & $18705$ & $135564$ & $1281953$ \\
     \hline
     $\mathrm{N_t^{(0)}}$ & $23$ & $60$ & $197$ & $1641$ & $7780$ \\
     \hline
