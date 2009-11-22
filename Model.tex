@@ -1,44 +1,86 @@
 \chapter{Математическая модель}
 
-Для данной задачи очевидным является записать математическую модель в
-виде уравнения распространения электромагнитных волн, рассмотренного в \cite{samarsky}.
-\[
+Из уравнений Максвелла получаем общий вид волнового уравнения:
+
+\begin{equation}
+\label{eq:wave_equation}
+\Delta \vec{E} = \frac{1}{a^2} \frac{\partial^2 \vec{E}}{\partial t^2} + \frac{4 \pi \sigma \mu}{c^2} \frac{\partial \vec{E}}{\partial t},
+\end{equation}
+
+\begin{tabbing}
+где \= $\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}$ \=~--- оператор Лапласа,\\
+\> $\sigma$ \>~--- электрическая проводимость среды,\\
+\>$\varepsilon$ \>~--- диэлектрическая проницаемость среды,\\
+\>$\mu$ \>~--- магнитная проводимость среды,\\
+\>$a = \frac{c}{\varepsilon \mu}$ \>~--- скорость распространения электромагнитных волн в среде.
+\end{tabbing}
+
+Вывод \eqref{eq:wave_equation} из уравнений Максвелла можно найти, например в \cite{samarsky}.
+
+Преобразуем \eqref{eq:wave_equation} для нашего случая. Положим, что внутри волновода вакуум, а стенки его по условию изготовлены из проводящего материала. В вакууме $\sigma = 0$, $\varepsilon = 1$, $\mu = 1$, а значит $a = c$. Кроме того, в нашем случае $\vec{E} = \left( E_x, 0, 0\right)$, т.~е. нам нужно рассматривать \eqref{eq:wave_equation} только в проекции на одну координату $E_x$. Причем $E_x$ по условию зависит только от $y$, $z$ и $t$, а от $x$ не зависит. Значит и $\frac{\partial^2 E_x}{\partial x^2} = 0$.
+
+С учетом этого, \eqref{eq:wave_equation} перепишется в виде
+
+\begin{equation}
+\label{eq:wave_equation_2}
+\Delta_{yz} E_x = \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2}.
+\end{equation}
+
+Здесь использовано довольно распространенное обозначение $\Delta_{xy} = \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}$.
+
+Задумаемся о краевых условиях для нашей задачи. Раз три стенки выполнены из электропроводящего матриала, значит на них напряженности поля никогда не возникнет: $\left. E_x \right|_{y=0} = \left. E_x \right|_{y=l_y} = \left. E_x \right|_{z=l_z} = 0$. Напряженность на оставшейся стенке нам известна. Она поддерживается неким источником и изменяется по известному закону: $\left. E_x \right|_{z=0} = \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda}t$ все интересующее нас время. При этом в начальный момент времени на всем волноводе какая-либо напряженность отсутствует и ее производная во времени --- тоже: $\left. E_x \right|_{t=0} = \left. \frac{\partial E_x}{\partial t} \right|_{t=0} = 0$. Присовокупив к \eqref{eq:wave_equation_2} эти условия, получим задачу математической физики:
+
+\begin{equation}
+\label{eq:problem}
 \left\{
-\begin{array}{rclrcl}
-  \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz}
-  E_x, & \Delta_{yz} &=& \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}\\
-  E_x|_{z=0} &=& \sin\frac{\pi y}{l_y} \sin\frac{2\pi c}{\lambda}t, & E_x|_{z=l_z} &=& 0,\\
-  E_x|_{y=0} &=& 0, & E_x|_{y=l_y} &=& 0,\\
-  E_x|_{t=0} &=& 0, & \frac{\partial E_x}{\partial t} &=& 0.
+\begin{array}{rclr}
+\frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2} &=& \Delta_{yz} E_x, & 0 \le y \le l_y, 0 \le z \le l_z, 0 \le t \le T; \\
+\left. E_x \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+\left. E_x \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+\left. E_x \right|_{z=0} &=&  \sin\frac{\pi y}{l_y} \sin\frac{2 \pi c}{\lambda} t, & 0 \le y \le l_y, 0 < t \le T; \\
+\left. E_x \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
+\left. E_x \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
+\left. \frac{\partial E_x}{\partial t} \right|_{t=0} &=& 0, & 0 \le y \le l_z, 0 \le z \le l_z.
 \end{array}
 \right.
-\]
-\\
-Как видно, такую задачу невозможно решить методом разделения
-переменных вследствие неоднородного краевого условия. Для решения этой
-проблемы сделаем замену $U = E_x - \frac{l_z - z}{l_z} \sin\frac{2\pi
-  c}{\lambda}t \sin\frac{\pi y}{l_y}$. Получим следующую задачу
-математической физики
-\[
+\end{equation}
+
+Как видно, задачу \eqref{eq:problem} невозможно решить методом разделения переменных вследствие неоднородного краевого условия. Для решения этой
+проблемы сделаем замену $U(y, z, t) = E_x(y, z, t) - \frac{l_z - z}{l_z} \sin\frac{2 \pi c}{\lambda}t \sin\frac{\pi y}{l_y}$. Получим следующую задачу
+математической физики:
+
+\begin{equation}
+\label{eq:new_problem}
 \left\{
-  \begin{array}{l}
-    \frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + \pi^2
-    \frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2
-      \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y},\\
-    \begin{array}{rcl}
-      U|_{z=0} &=& 0,\\
-      U|_{y=0} &=& 0,\\
-      U|_{t=0} &=& 0.\\
-    \end{array}
-    \begin{array}{rcl}
-      U|_{z=l_z} &=& 0,\\
-      U|_{y=l_y} &=& 0,\\
-      \frac{\partial U}{\partial t} &=& \frac{2\pi
-        c}{\lambda} \frac{l_z - z}{l_z} \sin\frac{\pi y}{\l_y}.
-    \end{array}
-  \end{array}
+\begin{array}{rclr}
+\frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} & = & \Delta_{yz} U + G(y, z, t), & 0 \le y \le l_y, 0 \le z \le l_z, 0 \le t \le T; \\
+\left. U \right|_{y=0} & = & 0, & 0 < z < l_z, 0 < t \le T; \\
+\left. U \right|_{y=l_y} & = & 0, & 0 < z < l_z, 0 < t \le T; \\ 
+\left. U \right|_{z=0} & = &  0, & 0 \le y \le l_y, 0 < t \le T; \\
+\left. U \right|_{z=l_z} &=& 0, & 0 \le y \le l_y, 0 < t \le T; \\
+\left. U \right|_{t=0} & = & 0, & 0 \le y \le l_z, 0 \le z \le l_z; \\
+\left. \frac{\partial U}{\partial t} \right|_{t=0} &=& \Phi(y, z), & 0 \le y \le l_z, 0 \le z \le l_z.
+\end{array}
 \right.
-\]
-\\
-Получена неоднородная задача, имеющая однородные краевые условия (что
-позволяет нам применять метод разделения переменных).
+\end{equation}
+
+Здесь сразу же для компактности записи использованы обозначения:
+
+\begin{equation}
+\label{eq:g}
+G(y, z, t) = \pi^2 c^2\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2}\sin k t \sin\frac{\pi y}{l_y},
+\end{equation}
+
+\begin{equation}
+\label{eq:phi}
+\Phi(y, z) = -k\frac{l_z - z}{l_z}\sin\frac{\pi y}{l_y},
+\end{equation}
+
+\begin{equation}
+\label{eq:k}
+k = \frac{2 \pi c}{\lambda}.
+\end{equation}
+
+
+Получена неоднородная задача, имеющая однородные краевые условия, что
+позволяет нам применять метод разделения переменных.
