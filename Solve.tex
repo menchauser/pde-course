@@ -1,70 +1,118 @@
 \chapter{Решение}
-
 \section{Собственные функции}
+Для последующих действий необходимо представить функцию $U$ из задачи \eqref{eq:new_problem} в виде разложения по собственным функциям. Сначала найдем собственные функции. Для этого решим задачу Штурма-Лиувилля.\\
+Представим функцию $U$ в форме  
+\begin{equation}
+  \label{func:form}
+  U(y, z, t) = T(t)Y(y)Z(z).
+\end{equation}
 
-Для последующих действий необходимо представить функцию $U$ в виде разложения по собственным функциям. Сначала найдем собственные функции. Для этого решим задачу Штурма-Лиувилля.\\
-Представим функцию в виде
+Рассмотрим однородное уравнение
+\begin{equation}
+  \label{eq:uniform}
+  \frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U.\\
+\end{equation}
+
+Подставив \eqref{func:form} в \eqref{eq:uniform}, получим
+\begin{equation}
+  \label{eq:equality}
+  \frac{1}{c^2}\frac{T''}{T} = \frac{Y''}{Y} + \frac{Z''}{Z} = -(\lambda^2 + \mu^2).\\
+\end{equation}
+
+Здесь $\lambda^2 = \const, \mu = \const$ в силу того, что левая часть \eqref{eq:equality} зависит только от $t$,
+а правая~--- от $y$ и $z$. Отсюда следует, что
+\begin{equation}
+  \label{eq:shturm-liuville}
+  \left.
+  \begin{array}{rcl}
+    Y'' + \lambda^2 Y &=& 0,\\
+    Z'' + \mu^2 Z &=& 0,\\
+    T'' + c^2(\lambda^2 + \mu^2)T &=& 0.
+  \end{array}
+  \right\}
+\end{equation}
+
+Подставив, кроме того, \eqref{func:form} в граничные условия \eqref{eq:new_problem} получим условия
+\begin{equation}
+  \left.
+  \label{eq:conditions}
+  \begin{array}{rcl}
+    Y(0) &=& 0,\qquad Y(l_y) = 0,\\
+    Z(0) &=& 0,\qquad Z(l_y) = 0.
+  \end{array}
+  \right\}
+\end{equation}
+
+Таким образом, использовав \eqref{eq:shturm-liuville} и \eqref{eq:conditions}, мы получим две задачи о собственных значениях (задачи Штурма-Лиувилля) для $Y$ и $Z$.
+\begin{equation}
+  \label{eq:shturm-liuville-final}
+  \begin{array}{ll}
+    \left\{
+      \begin{array}{l}
+        Y'' + \lambda^2Y = 0, \\
+        Y(0) = Y(l_y) = 0;
+      \end{array}
+    \right.
+    \left\{
+      \begin{array}{l}
+        Z'' + \mu^2Z = 0, \\
+        Z(0) = Z(l_z) = 0.
+      \end{array}
+    \right.  
+  \end{array}
+\end{equation}
+
+Решим первую задачу из системы \eqref{eq:shturm-liuville-final}. Как известно (см. \cite{samarsky}) общее решение такого уравнения представимо в виде
+\begin{equation}
+  \label{eq:common-solution}
+  Y(y) = A\sin{\lambda y} + B\cos{\lambda y}.
+\end{equation}
+
+Первое граничное условие $Y(0) = 0$ дает нам $B = 0$. Из второго условия $Y(l_y) = 0$ следует 
 \[
-U(y, z, t) = T(t)Y(y)Z(z).
-\]
-Подставим данное представление в следующее однородное уравнение
-\[
-\frac{1}{c^2} \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U\\
-\]
-И получим следующий вид
-\[
-\frac{1}{c^2}\frac{T''}{T} = \frac{Y''}{Y} + \frac{Z''}{Z} = -(\lambda^2 + \mu^2).\\
+Y(l_y) = A\sin{\lambda l_y} = 0.
 \]
 
-Решив две задачи Штурма-Лиувилля
-\[
-\begin{array}{ll}
-  \left\{
-    \begin{array}{l}
-      Y'' + \lambda^2Y = 0, \\
-      Y|_{y=0} = Y|_{y=l_y} = 0,
-    \end{array}
-  \right.
-  \left\{
-    \begin{array}{l}
-      Z'' + \mu^2Z = 0, \\
-      Z|_{z=0} = Z|_{z=l_z} = 0,
-    \end{array}
-  \right.  
-\end{array}
-\]
-получим, следующие собственные числа и собственные функции для $Y$ и $Z$
-\[
-\begin{array}{ll}
-  \left\{
-    \begin{array}{l}
-      Y = A\sin\lambda y, \\
-      \lambda = \frac{\pi n}{l_y},
-    \end{array}
-  \right.
-  \left\{
-    \begin{array}{l}
-      Z = B\sin\mu z, \\
-      \mu = \frac{\pi m}{l_z}.
-    \end{array}
-  \right.  
-\end{array}
-\]
+Поскольку $Y(y)$ не равно тождественно нулю, то $A \ne 0$, значит
+\begin{equation}
+  \label{eq:sin}
+  \sin{\lambda l_y} = 0.
+\end{equation}
+
+Из \eqref{eq:sin} следует, что $\lambda = \cfrac{\pi n}{l_y}$.
+
+Аналогично решаем вторую задачу системы \eqref{eq:shturm-liuville-final} и получаем нетривиальные решения
+\begin{equation}
+  \label{func:eigen}
+  \begin{array}{ll}
+    \left\{
+      \begin{array}{l}
+        Y = A\sin\lambda y, \\
+        \lambda = \frac{\pi n}{l_y},
+      \end{array}
+    \right.
+    \left\{
+      \begin{array}{l}
+        Z = B\sin\mu z, \\
+        \mu = \frac{\pi m}{l_z}.
+      \end{array}
+    \right.  
+  \end{array}
+\end{equation}
 
 \section{Поиск решения}
 
-Таким образом, $U$ можно представить в виде следующего двойного ряда Фурье
-\[
-U(y, z, t) = \displaystyle \sum_{m=1}^{\infty}\sum_{n=1}^{\infty} \gamma(t) \sin\frac{\pi n y}{l_y} \sin\frac{\pi m z}{l_z}.
-\]
+Таким образом, $U$ можно представить в виде следующего двойного ряда Фурье по функциям \eqref{func:eigen}.
+\begin{equation}
+  \label{eq:u-series}
+  U(y, z, t) = \displaystyle \sum_{m=1}^{\infty}\sum_{n=1}^{\infty} \gamma(t) \sin\frac{\pi n y}{l_y} \sin\frac{\pi m z}{l_z}.
+\end{equation}
 \\
-Разложим по данным собственным функциям неоднородную правую часть и все начальные условия. В дальнейших рассуждениях для простоты умножим левую и правую части уравнения на $c^2$, получив
+Разложим собственным функциям \eqref{func:eigen} неоднородную правую часть $G(y, z, t)$ системы \eqref{eq:new_problem} и функцию $\Phi(y, z)$. В дальнейших рассуждениях для простоты умножим левую и правую части первого уравнения \eqref{eq:new_problem} на $c^2$, получив
 \[
-\frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + \pi^2 c^2
-\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2
-  \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}.\\
+\frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + c^2G(y, z, t)
 \]
-\\
+
 %Кроме того введем для простоты две замены
 % \begin{eqnarray*}
 %   k &=& \frac{2\pi c}{\lambda},\\
@@ -166,3 +214,21 @@ $\begin{equationsset}
     \sum_{m=1}^{\infty} \left( \frac{2\pi c^2}{m(w_m^2 - k^2)}\left(\frac{4l_y^2 - \lambda^2}{l_y^2\lambda^2} \right)\sin{kt} - \frac{k}{w_m}\left(\frac{2}{\pi m} + D\right)\sin{w_mt} \right) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}\\
     &+& \frac{l_z - z}{l_z} \sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}
 \end{eqnarray*}
+
+\begin{figure}[!hbtp]
+  \center
+  \includegraphics[width=0.9\linewidth]{first}
+  \caption{Волна в момент $t = 2\cdot10^{-15}$}
+\end{figure}
+
+\begin{figure}[!hbtp]
+  \center
+  \includegraphics[width=0.9\linewidth]{second}
+  \caption{Волна в момент $t = 1\cdot10^{-14}$}
+\end{figure}
+
+\begin{figure}[!hbtp]
+  \center
+  \includegraphics[width=0.9\linewidth]{third}
+  \caption{Волна в момент $t = 1\cdot10^{-13}$}
+\end{figure}
