@@ -100,7 +100,7 @@ Y(l_y) = A\sin{\lambda l_y} = 0.
   \end{array}
 \end{equation}
 
-\section{Поиск решения}
+\section{Получение решения}
 
 Таким образом, $U$ можно представить в виде следующего двойного ряда Фурье по функциям \eqref{func:eigen}.
 \begin{equation}
@@ -109,32 +109,44 @@ Y(l_y) = A\sin{\lambda l_y} = 0.
 \end{equation}
 \\
 Разложим собственным функциям \eqref{func:eigen} неоднородную правую часть $G(y, z, t)$ системы \eqref{eq:new_problem} и функцию $\Phi(y, z)$. В дальнейших рассуждениях для простоты умножим левую и правую части первого уравнения \eqref{eq:new_problem} на $c^2$, получив
-\[
-\frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + c^2G(y, z, t)
-\]
-
-%Кроме того введем для простоты две замены
-% \begin{eqnarray*}
-%   k &=& \frac{2\pi c}{\lambda},\\
-%   w_{nm} &=& \pi c \sqrt{\frac{n^2}{l_y^2} + \frac{m^2}{l_z^2}}.\\
-% \end{eqnarray*}
+\begin{equation}
+  \label{eq:new_eq_simple}
+  \frac{\partial^2 U}{\partial t^2} = \Delta_{yz} U + c^2G(y, z, t)
+\end{equation}
 
 \begin{enumerate}
-\item Разложение неоднородной правой части.
-  Разложим следующую функцию $G(y, z, t) = \pi^2 c^2\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}$ по данным базисным функциям. Заметим, что функция $G$ уже содержит в себе собственную функцию $\sin\frac{\pi y}{l_y}$, значит, необходимо разложить лишь зависящую от $z$ часть. Разложение будет иметь вид
-  \[
-  G(y, z, t) =  \pi^2 c^2 \frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}  g_{nm}^{(z)}(t) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
-  \]
-  Найдем коэффициенты ряда. 
-  \begin{eqnarray*}
-    g_{nm}(t) &=& \frac{2}{l_z} \displaystyle \int_0^{l_z} \frac{l_z - z}{l_z} \sin\frac{\pi m z}{l_z} dz = \frac{2}{l_z}\left[\int_0^{l_z}\sin\frac{\pi m z}{l_z}dz - \int_0^{l_z}\frac{z}{l_z} \sin\frac{\pi m z}{l_z}dz\right]\\
-    &=& \frac{2}{l_z} \left[ \left. -\frac{l_z}{\pi m} \cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} - \left. \frac{z l_z}{\pi m}\cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} + \int_0^{l_z}\frac{l_z}{\pi m}\cos\frac{\pi m z}{l_z}dz\right]\\
+\item Разложение $G(y, z, t)$.
+  Разложим функцию $G(y, z, t) = \pi^2 c^2\frac{l_z - z}{lz}\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2}\sin\frac{2\pi c}{\lambda}t \sin\frac{\pi y}{l_y}$ по функциям \eqref{func:eigen}. Заметим, что функция $G$ уже содержит в себе собственную функцию $\sin\frac{\pi y}{l_y}$, значит, необходимо разложить лишь зависящую от $z$ часть. Разложение будет иметь вид
+  \begin{equation}
+    \label{func:G_represent}
+    G(y, z, t) =  \pi^2 c^2 \frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}  g_{nm}^{(z)}(t) \sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \end{equation}
+  Найдем коэффициенты ряда.
+%   \begin{equation}
+%     \label{func:g}
+%     \begin{array}{rcl}
+%       g^{(z)}_{nm}(t) &=& \frac{2}{l_z} \displaystyle \int_0^{l_z} \frac{l_z - z}{l_z} \sin\frac{\pi m z}{l_z} dz
+%       =\frac{2}{l_z}\left[\int_0^{l_z}\sin\frac{\pi m z}{l_z}dz - \int_0^{l_z}\frac{z}{l_z} \sin\frac{\pi m z}{l_z}dz\right] =\\
+%       \\
+%       &=& \frac{2}{l_z} \left[ \left. -\frac{l_z}{\pi m} \cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} - \left. \frac{z l_z}{\pi m}\cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} + \int_0^{l_z}\frac{l_z}{\pi m}\cos\frac{\pi m z}{l_z}dz\right] =\\
+%       \\
+%       &=& \frac{2}{l_z}\frac{l_z}{\pi m} \left( 1 - (-1)^m - (-1)^{m+1} \right) = \frac{2}{\pi m}.
+%     \end{array}
+%   \end{equation}
+  \begin{eqnarray}
+    \nonumber
+    g^{(z)}_{nm}(t) &=& \frac{2}{l_z} \displaystyle \int_0^{l_z} \frac{l_z - z}{l_z} \sin\frac{\pi m z}{l_z} dz = \frac{2}{l_z}\left[\int_0^{l_z}\sin\frac{\pi m z}{l_z}dz - \int_0^{l_z}\frac{z}{l_z} \sin\frac{\pi m z}{l_z}dz\right] =\\
+    \nonumber
+    &=& \frac{2}{l_z} \left[ \left. -\frac{l_z}{\pi m} \cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} - \left. \frac{z l_z}{\pi m}\cos\frac{\pi m z}{l_z}\right|_{0}^{l_z} + \int_0^{l_z}\frac{l_z}{\pi m}\cos\frac{\pi m z}{l_z}dz\right] =\\
+    \label{func:g}
     &=& \frac{2}{l_z}\frac{l_z}{\pi m} \left( 1 - (-1)^m - (-1)^{m+1} \right) = \frac{2}{\pi m}.
-  \end{eqnarray*}
-  Таким образом, получаем
-  \[
-  G(y, z, t) = 2\pi c^2\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}\frac{1}{m}\sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
-  \]
+  \end{eqnarray}
+  
+  Подставив разложение \eqref{func:g} в \eqref{func:G_represent} получим
+  \begin{equation}
+    \label{func:G}
+    G(y, z, t) = 2\pi c^2\frac{4l_y^2 - \lambda^2}{\lambda^2 \l_y^2} \sin\frac{2\pi c}{\lambda}t\displaystyle \sum_{m=1}^{\infty}\frac{1}{m}\sin\frac{\pi y}{l_y} \sin\frac{\pi m z}{l_z}.
+  \end{equation}
 
 \item Разложение начального условия.
 
